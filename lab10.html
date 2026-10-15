@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garbha passes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-slate-950 via-red-950 to-slate-900 flex items-center justify-center p-4">
+
+    <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6">
+
+        <h1 class="text-3xl font-bold text-center text-red-900 mb-2">
+            Passes
+        </h1>
+
+        <p class="text-center text-gray-500 mb-6">
+            Garbha Pass Booking System
+        </p>
+
+        <!-- Pass Selection -->
+        <label class="font-semibold text-gray-700">
+            Select Pass
+        </label>
+
+        <select id="movie"
+            class="w-full border rounded-lg p-3 mt-2 mb-4">
+            <option value="Avengers">Night</option>
+            <option value="Interstellar">Afternoon</option>
+            <option value="Inception">Evening</option>
+            <option value="Spider-Man">Morning</option>
+        </select>
+
+        <!-- Show Time -->
+        <label class="font-semibold text-gray-700">
+            playing Time
+        </label>
+
+        <select id="time"
+            class="w-full border rounded-lg p-3 mt-2 mb-4">
+            <option>10:00 AM</option>
+            <option>1:00 PM</option>
+            <option>4:00 PM</option>
+            <option>10:00 PM</option>
+        </select>
+
+        <!-- Seat Type -->
+        <label class="font-semibold text-gray-700">
+            Select Pass Type
+        </label>
+
+        <select id="seat"
+            class="w-full border rounded-lg p-3 mt-2 mb-4">
+            <option value="150">Silver - ₹150</option>
+            <option value="250">Gold - ₹250</option>
+            <option value="350">Platinum - ₹350</option>
+        </select>
+
+        <!-- Tickets -->
+        <label class="font-semibold text-gray-700">
+            Number of Tickets
+        </label>
+
+        <input type="number" id="tickets" min="1" max="10"
+            placeholder="Enter number of tickets"
+            class="w-full border rounded-lg p-3 mt-2 mb-5">
+
+        <!-- Button -->
+        <button onclick="bookpass()"
+            class="w-full bg-purple-700 hover:bg-purple-800 text-white font-semibold py-3 rounded-lg transition">
+            Book Pass
+        </button>
+
+        <!-- Booking Result -->
+        <div id="result"
+            class="hidden bg-purple-50 border border-purple-200 rounded-xl p-5 mt-6 text-gray-800">
+
+            <h2 class="text-xl font-bold text-center text-purple-800 mb-4">
+                Booking Confirmed!
+            </h2>
+
+            <p id="movieResult" class="mb-2"></p>
+            <p id="timeResult" class="mb-2"></p>
+            <p id="seatResult" class="mb-2"></p>
+            <p id="ticketResult" class="mb-2"></p>
+
+            <hr class="my-3">
+
+            <p id="totalResult"
+                class="text-xl font-bold text-purple-900"></p>
+        </div>
+
+        <p class="text-center text-gray-400 text-sm mt-6">
+            Developed by Jivesh Karemore
+        </p>
+
+    </div>
+
+    <script>
+
+        function bookpass() {
+
+            let movie = document.getElementById("movie").value;
+            let time = document.getElementById("time").value;
+            let price = Number(document.getElementById("seat").value);
+            let tickets = Number(document.getElementById("tickets").value);
+
+            if (tickets < 1 || tickets > 10 || !Number.isInteger(tickets)) {
+                alert("Please enter 1 to 10 tickets");
+                return;
+            }
+
+            let total = price * tickets;
+
+            let seatType = "";
+
+            if (price == 150) {
+                seatType = "Silver";
+            }
+            else if (price == 250) {
+                seatType = "Gold";
+            }
+            else {
+                seatType = "Platinum";
+            }
+
+            document.getElementById("movieResult").innerText =
+                "Pass: " + movie;
+
+            document.getElementById("timeResult").innerText =
+                "Playing Time: " + time;
+
+            document.getElementById("seatResult").innerText =
+                "Pass Type: " + seatType;
+
+            document.getElementById("ticketResult").innerText =
+                "Tickets: " + tickets;
+
+            document.getElementById("totalResult").innerText =
+                "Total Amount: ₹" + total;
+
+            document.getElementById("result").classList.remove("hidden");
+        }
+
+    </script>
+
+</body>
+</html>
